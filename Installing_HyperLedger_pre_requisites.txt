@@ -1,0 +1,230 @@
+
+FYI -- sudo apt install python2.7 python-pip ( Has nothing to do with Hyper Ledger but please install for Web Assembly ) 
+
+#AllThingsBlockChain 
+
+This week we go over the pre-requisites to installing Hyper Ledger Fabric  
+
+Instructions are on the EdEx website https://www.edx.org/ , simple enroll to the course below
+
+Blockchain for Business - An Introduction to Hyperledger Technologies
+https://courses.edx.org/courses/course-v1:LinuxFoundationX+LFS171x+3T2018/course/
+
+Here is What this course covers in Chapter 4 (Technical Requirements ) 
+###########################################################################################
+
+Installation Instructions for Windows
+-----------------------------------------------------
+1.System Requirements
+2.Installing VirtualBox and Creating a Virtual Machine
+3.Downloading and Installing Linux (Part I)
+4.Downloading and Installing Linux (Part II)
+5.Installing cURL
+6.Installing Docker
+7.Docker Compose
+8.Installing Node.js and npm
+9.Installing Go Language
+
+#############################################################
+1.System Requirements
+#############################################################
+Please note you must not have Docker for Windows installed, or HyperV enabled for VirtualBox to run.
+See here on how to disable HyperV (link below ) 
+http://www.poweronplatforms.com/enable-disable-hyper-v-windows-10-8/
+or run 
+Disable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All ( in powershell )
+
+Below are the expected requirements for Ubuntu 16.04, which we will be downloading on our virtual machine:
+
+2 GHz dual core processor or better
+2 GB system memory
+25 GB of free hard drive space
+Either a DVD drive or a USB port for the installer media.
+
+
+#############################################################
+2.Installing VirtualBox and Creating a Virtual Machine
+#############################################################
+Download and install the latest VirtualBox platform packages from here.(link below ) 
+https://www.virtualbox.org/wiki/Downloads
+
+
+#############################################################
+3.Downloading and Installing Linux (Part I)
+#############################################################
+Before starting the virtual machine, you will need to install your Linux distribution.
+
+If using Ubuntu, please download the 16.04 desktop version here.( link below )
+http://releases.ubuntu.com/16.04/
+
+Once the image file download is complete, click "Start" to boot your virtual machine.
+
+
+#############################################################
+4.Downloading and Installing Linux (Part II)
+#############################################################
+To open a terminal, you can press CTRL+ALT+T, or find it by clicking the Ubuntu Home button and searching for "terminal".
+
+You can now browse the web, download/install any Ubuntu software and, most importantly, continue the tutorial! Good luck!
+
+For more help on VirtualBox, check out their excellent manual here.( link below )
+https://www.virtualbox.org/manual/
+
+
+#############################################################
+5.Installing cURL
+#############################################################
+
+(A) Open a terminal window: CTRL+ALT+T.
+
+Type the following command and enter your password:
+
+$ sudo apt install curl
+
+To check, run the following command in your terminal/command line:
+
+$ curl -V
+
+Note: The "V" is capitalized.
+
+
+#############################################################
+6.Installing Docker
+#############################################################
+
+Docker provides great instructions on how to install it here.
+
+https://docs.docker.com/install/linux/docker-ce/ubuntu/
+
+### Note : Manage Docker as a non-root user ###
+
+If you don't want to use sudo when you use the docker command, create a Unix group called docker and add users to it. When the Docker daemon starts, 
+it makes the ownership of the Unix socket read/writable by the docker group.
+
+Warning: The docker group grants privileges equivalent to the root user. For details on how this impacts security in your system, 
+see Docker Daemon Attack Surface. ( below ) 
+https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface
+
+To create the docker group and add your user:
+
+1. Create the docker group:
+
+$ sudo groupadd docker
+
+2. Add your user to the docker group:
+
+$ sudo usermod -aG docker $USER ( sudo usermod -aG docker $remi  )
+
+3. Log out and log back in, so that your group membership is re-evaluated.
+
+4. Since we are on a virtual machine, it may be necessary to restart the virtual machine for changes to take effect.
+
+5. Verify that you can run Docker commands without sudo:
+
+	$ docker run hello-world
+
+6. This command downloads a test image and runs it in a container. When the container runs, it prints an informational message and exits.
+
+
+#############################################################
+7.Docker Compose
+#############################################################
+
+To install Docker Compose, run the following commands in your terminal/command line:
+
+$ sudo apt update
+
+$ sudo apt install docker-compose
+
+Check to make sure that you have Docker version 17.03.1-ce or greater, and Docker Compose version 1.9.0 or greater:
+
+$ docker --version && docker-compose --version 
+
+
+#############################################################
+8.Installing Node.js and npm
+#############################################################
+
+To install Node.js and npm, run the following commands in your terminal/command line:
+
+$ sudo bash -c "cat >/etc/apt/sources.list.d/nodesource.list" <<EOL
+deb https://deb.nodesource.com/node_6.x xenial main
+deb-src https://deb.nodesource.com/node_6.x xenial main
+EOL
+
+$ curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
+
+$ sudo apt update
+
+$ sudo apt install nodejs
+
+$ sudo apt install npm
+
+Verify the installation, as well as the versions of both Node.js and npm, and make sure the Node.js version you are installing is greater than v6.9 (do not use v7), and the npm version is greater than 3.x:
+
+$ node --version && npm --version
+
+
+#############################################################
+9.Installing Go Language
+#############################################################
+
+Visit https://golang.org/dl/ and make note of the latest stable release (v1.8 or later).
+
+To install Go language, run the following commands in your terminal/command line:
+
+$ sudo apt update
+
+$ sudo curl -O https://storage.googleapis.com/golang/go1.9.2.linux-amd64.tar.gz  
+
+(* Note : replace tar file with latest from golang website *)
+ e.g replace  go1.9.2.linux-amd64.tar.gz with go1.12.4.linux-amd64.tar.gz ) // this is as of April 2019 pls check https://golang.org/dl/ for latest 
+ so this will be as below ...  
+
+sudo curl -O https://storage.googleapis.com/golang/go1.12.4.linux-amd64.tar.gz
+
+$ sudo tar -xvf go1.9.2.linux-amd64.tar.gz  
+
+(* same with this above , go1.9.2.linux-amd64.tar.gz  will be  go1.12.4.linux-amd64.tar.gz ) // this is as of April 2019 pls check https://golang.org/dl/ for latest 
+ this will be as below   :
+
+ sudo tar -xvf go1.12.4.linux-amd64.tar.gz
+
+$ sudo mv go /usr/local
+
+$ echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.profile
+
+$ source ~/.profile
+
+Check that the Go version is v1.8 or later:
+
+$ go version
+
+
+
+
+
+Useful Links ( from EdEx Course)
+########################################################
+
+1. Download and install the latest VirtualBox platform packages from link below
+https://www.virtualbox.org/wiki/Downloads
+
+2. Before starting the virtual machine, you will need to install your Linux distribution.
+http://releases.ubuntu.com/16.04/
+
+3. For more help on VirtualBox, check out their excellent manual
+https://www.virtualbox.org/manual/
+
+4. Docker provides great instructions on how to install it from link below
+https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/
+
+
+After this You should be able to:
+############################################
+Install cURL.
+Install Node.js and npm package manager.
+Install Go Language.
+Install Docker and Docker Compose.
+Install Virtual Box (if you are a Windows user).
+
