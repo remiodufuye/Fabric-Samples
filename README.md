@@ -7,11 +7,6 @@ sudo ./byfn.sh generate
 
 ERROR MESSAGE : cannot-find-cryptogen-tool-in-fabric
 
-
-URL
-###########################################
-https://stackoverflow.com/questions/45564481/cannot-find-cryptogen-tool-in-fabric
-
 From Above URL:
 
 First I made sure that my fabric-samples folder was up to date, I'm unsure if this helped but here if anyone is trying to copy. I followed the steps here:
@@ -21,7 +16,6 @@ git clone -b master https://github.com/hyperledger/fabric-samples.git
 cd fabric-samples
 git checkout master
 then running (replacing ubuntu with your username):
-
 
 
 cd ~/Build-Multi-Host-Network-Hyperledger/
